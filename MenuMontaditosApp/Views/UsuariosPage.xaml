@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MenuMontaditosApp.Views.UsuariosPage"
+             Title="Gestión de Usuarios">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- CABECERA -->
+        <Label Grid.Row="0"
+               Text="Gestión de Usuarios"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               Margin="0,10,0,10"/>
+
+        <!-- ZONA DE CREAR USUARIO -->
+        <Border Grid.Row="1"
+                Stroke="Gray"
+                StrokeThickness="1"
+                Margin="10"
+                Padding="10">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="5"/>
+            </Border.StrokeShape>
+
+            <VerticalStackLayout Spacing="8">
+
+                <Label Text="Crear nuevo usuario"
+                       FontAttributes="Bold"
+                       FontSize="16"/>
+
+                <Entry x:Name="EntryNuevoUsuario"
+                       Placeholder="Nombre de usuario"/>
+
+                <Entry x:Name="EntryNuevoPassword"
+                       Placeholder="Contraseña"
+                       IsPassword="True"/>
+
+                <Label Text="Rol"/>
+                <Picker x:Name="PickerRol">
+                    <Picker.ItemsSource>  <!-- para seleccionar el rol que vamos a otorgarle --> 
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Cocina</x:String>
+                            <x:String>Administrador</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <Button Text="Crear usuario"
+                        Clicked="Crear_Click"
+                        HeightRequest="40"/>
+
+                <Label x:Name="LabelError"
+                       TextColor="Red"
+                       IsVisible="False"/>
+
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- LISTA DE USUARIOS -->
+        <CollectionView Grid.Row="2"
+                        ItemsSource="{Binding Usuarios}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+
+                    <Border Stroke="Gray"
+                            StrokeThickness="1"
+                            Margin="10,5,10,5"
+                            Padding="10">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="5"/>
+                        </Border.StrokeShape>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label Text="{Binding Nombre}"
+                                       FontSize="16"
+                                       FontAttributes="Bold"/>
+                                <Label Text="{Binding Rol}"
+                                       FontSize="14"
+                                       TextColor="Gray"/>
+                            </VerticalStackLayout>
+
+                            <Button Grid.Column="1"
+                                    Text="Eliminar"
+                                    Clicked="Eliminar_Click"
+                                    CommandParameter="{Binding}"
+                                    BackgroundColor="IndianRed"
+                                    TextColor="White"/>
+
+                        </Grid>
+                    </Border>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+
+</ContentPage>

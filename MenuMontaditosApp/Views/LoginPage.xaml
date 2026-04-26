@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MenuMontaditosApp.Views.LoginPage"
+             Title="Iniciar sesión">
+
+    <VerticalStackLayout VerticalOptions="Center"
+                         HorizontalOptions="Center"
+                         Spacing="15"
+                         WidthRequest="300">
+
+        <Label Text="Iniciar sesión"
+               FontSize="28"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               Margin="0,0,0,20"/>
+
+        <Label Text="Usuario"/>
+        <Entry x:Name="EntryUsuario"
+               Placeholder="Escribe tu usuario"/>
+
+        <Label Text="Contraseña"/>
+        <Entry x:Name="EntryPassword"
+               Placeholder="Escribe tu contraseña"
+               IsPassword="True"/>
+
+        <Button Text="Entrar"
+                Clicked="Entrar_Click"
+                Margin="0,20,0,0"
+                HeightRequest="50"/>
+
+        <!-- Mostramos solo si hay error de login -->
+        <Label x:Name="LabelError"
+               TextColor="Red"
+               HorizontalOptions="Center"
+               IsVisible="False"/>
+
+    </VerticalStackLayout>
+
+</ContentPage>

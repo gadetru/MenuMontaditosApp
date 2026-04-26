@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MenuMontaditosApp.Views.CocinaPage"
+             Title="Cocina">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- CABECERA -->
+        <Label Grid.Row="0"
+               Text="Cocina"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               Margin="0,10,0,10"/>
+
+        <!-- LISTA DE PEDIDOS -->
+        <!-- En MAUI usamos CollectionView, que es como el ItemsControl de WPF pero más completo -->
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding Pedidos}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+
+                    <!-- TARJETA DE CADA PEDIDO -->
+                    <!-- Border es como una caja con borde y color de fondo. -->
+                    <!-- El BackgroundColor lo sacamos del convertidor que creamos antes -->
+                    <Border Stroke="Gray"
+                            StrokeThickness="1"
+                            Margin="10"
+                            Padding="10"
+                            BackgroundColor="{Binding Estado, Converter={StaticResource EstadoAColor}}">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="5"/>
+                        </Border.StrokeShape>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- NOMBRE Y HORA -->
+                            <HorizontalStackLayout Grid.Row="0"
+                                                   Margin="0,0,0,8">
+                                <Label Text="{Binding Pedido.NombreCliente}"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       Margin="0,0,10,0"/>
+                                <Label Text="{Binding Pedido.FechaHora, StringFormat='{0:HH:mm}'}"
+                                       FontSize="14"
+                                       TextColor="Gray"/>
+                            </HorizontalStackLayout>
+
+                            <!-- PRODUCTOS DEL PEDIDO -->
+                            <CollectionView Grid.Row="1"
+                                            ItemsSource="{Binding Detalles}"
+                                            Margin="0,0,0,8">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <HorizontalStackLayout Margin="0,2,0,2">
+
+                                            <!-- CheckBox de MAUI -->
+                                            <CheckBox IsChecked="{Binding EstaListo}"
+                                                      IsEnabled="{Binding Editable}"
+                                                      Margin="0,0,8,0"/>
+
+                                            <Label Text="{Binding Detalle.Producto.Nombre}"
+                                                   WidthRequest="150"
+                                                   VerticalOptions="Center"/>
+
+                                            <Label Text="{Binding Detalle.Cantidad}"
+                                                   Margin="8,0,0,0"
+                                                   VerticalOptions="Center"/>
+
+                                        </HorizontalStackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                            <!-- BOTONES -->
+                            <HorizontalStackLayout Grid.Row="2"
+                                                   HorizontalOptions="End">
+
+                                <!-- Aqui pasamos cada botón al code-behind con CommandParameter
+                                     que lleva el PedidoItemViewModel completo -->
+                                <Button Text="En proceso"
+                                        Clicked="EnProceso_Click"
+                                        CommandParameter="{Binding}"
+                                        WidthRequest="120"
+                                        Margin="0,0,8,0"/>
+
+                                <Button Text="Completado"
+                                        Clicked="Completado_Click"
+                                        CommandParameter="{Binding}"
+                                        WidthRequest="120"/>
+
+                            </HorizontalStackLayout>
+
+                        </Grid>
+                    </Border>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+
+</ContentPage>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MenuMontaditosApp.Views.ConfiguracionInicialPage"
+             Title="Configuración inicial">
+
+    <VerticalStackLayout VerticalOptions="Center"
+                         HorizontalOptions="Center"
+                         Spacing="15"
+                         WidthRequest="350">
+
+        <Label Text="Bienvenido"
+               FontSize="28"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"/>
+
+        <Label Text="No hay usuarios en la app. Crea el primer administrador para empezar."
+               HorizontalOptions="Center"
+               HorizontalTextAlignment="Center"
+               Margin="0,0,0,20"/>
+
+        <Label Text="Nombre de usuario"/>
+        <Entry x:Name="EntryUsuario"
+               Placeholder="Ej: admin"/>
+
+        <Label Text="Contraseña"/>
+        <Entry x:Name="EntryPassword"
+               Placeholder="Mínimo 4 caracteres"
+               IsPassword="True"/>
+
+        <Label Text="Repetir contraseña"/>
+        <Entry x:Name="EntryPasswordRepetir"
+               Placeholder="Vuelve a escribir la contraseña"
+               IsPassword="True"/>
+
+        <Button Text="Crear administrador"
+                Clicked="Crear_Click"
+                Margin="0,20,0,0"
+                HeightRequest="50"/>
+
+        <Label x:Name="LabelError"
+               TextColor="Red"
+               HorizontalOptions="Center"
+               IsVisible="False"/>
+
+    </VerticalStackLayout>
+
+</ContentPage>

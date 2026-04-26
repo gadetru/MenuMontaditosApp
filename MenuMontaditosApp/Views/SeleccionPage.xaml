@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MenuMontaditosApp.Views.SeleccionPage"
+             Title="Panel de Control">
+
+    <VerticalStackLayout VerticalOptions="Center"
+                         HorizontalOptions="Center"
+                         Spacing="20">
+
+        <Label Text="¿Qué pantalla quieres abrir?"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"/>
+
+        <Button Text="👤 Cliente"
+                WidthRequest="250"
+                HeightRequest="70"
+                FontSize="18"
+                Clicked="BtnCliente_Click"/>
+
+        <Button Text="🍳 Cocina"
+                WidthRequest="250"
+                HeightRequest="70"
+                FontSize="18"
+                Clicked="BtnCocina_Click"/>
+
+        <Button Text="🍺 Barra"
+                WidthRequest="250"
+                HeightRequest="70"
+                FontSize="18"
+                Clicked="BtnBarra_Click"/>
+        
+        <Button Text="Control de usuarios"
+                WidthRequest="250"
+                HeightRequest="70"
+                FontSize="18"
+                Clicked="BtnRoles_click"/>
+
+    </VerticalStackLayout>
+
+</ContentPage>

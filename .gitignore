@@ -1,0 +1,21 @@
+# Carpetas de compilación
+bin/
+obj/
+.vs/
+
+# Archivos de usuario de Visual Studio
+*.user
+*.suo
+
+# Resultados de tests
+[Tt]est[Rr]esult*/
+
+# Logs
+*.log
+
+# Archivos del SO
+.DS_Store
+Thumbs.db
+
+# Carpetas de paquetes
+packages/

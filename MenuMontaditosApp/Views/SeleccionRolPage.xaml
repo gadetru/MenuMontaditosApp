@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>  
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MenuMontaditosApp.Views.SeleccionRolPage"
+             Title="Bienvenido">
+
+    <VerticalStackLayout VerticalOptions="Center"
+                         HorizontalOptions="Center"
+                         Spacing="20">
+
+        <Label Text="¿Quién eres?"
+               FontSize="28"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               Margin="0,0,0,20"/>
+
+        <Button Text="Area Clientes"
+                Clicked="Cliente_Click"
+                WidthRequest="280"
+                HeightRequest="80"
+                FontSize="20"/>
+
+        <Button Text="Administrador"
+                Clicked="Personal_Click"
+                WidthRequest="280"
+                HeightRequest="80"
+                FontSize="20"/>
+
+    </VerticalStackLayout>
+
+</ContentPage>

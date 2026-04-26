@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MenuMontaditosApp.Views.CartaMenuPage">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- BOTONES CATEGORÍA -->
+        <HorizontalStackLayout Grid.Row="0"
+                               HorizontalOptions="Center"
+                               Margin="0,10,0,10">
+
+            <Button Text="🍔 Comida"
+                    WidthRequest="150"
+                    HeightRequest="50"
+                    Clicked="Comida_Click"/>
+
+            <Button Text="🥤 Bebida"
+                    WidthRequest="150"
+                    HeightRequest="50"
+                    Clicked="Bebida_Click"/>
+
+            <Button Text="🍰 Postres"
+                    WidthRequest="150"
+                    HeightRequest="50"
+                    Clicked="Postre_Click"/>
+
+        </HorizontalStackLayout>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <Grid Grid.Row="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- LISTA DE PRODUCTOS -->
+            <CollectionView Grid.Column="0"
+                            ItemsSource="{Binding Productos}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <HorizontalStackLayout Padding="5">
+
+                            <Label Text="{Binding Nombre}"
+                                   WidthRequest="150"
+                                   VerticalOptions="Center"/>
+
+                            <Label Text="{Binding Precio, StringFormat='{0:F2} €'}"
+                                   WidthRequest="70"
+                                   VerticalOptions="Center"/>
+
+                            <Button Text="Añadir"
+                                    WidthRequest="80"
+                                    Clicked="Add_Click"
+                                    CommandParameter="{Binding}"/>
+
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- CARRITO -->
+            <Grid Grid.Column="1">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <CollectionView Grid.Row="0"
+                                ItemsSource="{Binding Carrito}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <HorizontalStackLayout Padding="5">
+
+                                <Label Text="{Binding Producto.Nombre}"
+                                       WidthRequest="100"
+                                       VerticalOptions="Center"/>
+
+                                <Button Text="-"
+                                        WidthRequest="35"
+                                        Clicked="Remove_Click"
+                                        CommandParameter="{Binding}"/>
+
+                                <Label Text="{Binding Cantidad}"
+                                       WidthRequest="30"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"/>
+
+                                <Button Text="+"
+                                        WidthRequest="35"
+                                        Clicked="Add_Click_Carrito"
+                                        CommandParameter="{Binding}"/>
+
+                            </HorizontalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- TOTAL -->
+                <Label Grid.Row="1"
+                       Text="{Binding Total, StringFormat='Total: {0:F2} €'}"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       HorizontalOptions="End"
+                       Margin="0,5,5,5"/>
+
+                <!-- NOMBRE Y CONFIRMAR -->
+                <VerticalStackLayout Grid.Row="2" Margin="5,10,5,5">
+
+                    <Label Text="¿Cómo te llamamos?"
+                           Margin="0,0,0,4"/>
+
+                    <Entry Placeholder="Deje aquí su nombre para avisarle"
+                           Text="{Binding NombreCliente}"
+                           MaxLength="50"
+                           Margin="0,0,0,8"/>
+
+                    <Button Text="Confirmar pedido"
+                            Command="{Binding ConfirmarPedidoCommand}"
+                            HeightRequest="40"/>
+
+                </VerticalStackLayout>
+
+            </Grid>
+
+        </Grid>
+
+    </Grid>
+
+</ContentPage>
