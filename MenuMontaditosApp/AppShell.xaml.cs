@@ -16,6 +16,7 @@
             Routing.RegisterRoute("SeleccionPage", typeof(Views.SeleccionPage));
             Routing.RegisterRoute("SeleccionRolPage", typeof(Views.SeleccionRolPage));
             Routing.RegisterRoute("UsuariosPage", typeof(Views.UsuariosPage));
+            Routing.RegisterRoute("ProductosCrudPage", typeof(Views.ProductosCrudPage));
 
         }
     }

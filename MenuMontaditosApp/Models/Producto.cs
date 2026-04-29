@@ -12,6 +12,7 @@ namespace MenuMontaditosApp.Models
         public string Nombre { get; set; } = string.Empty;
         public decimal Precio { get; set; }
         public Enums.CategoriaProducto Categoria { get; set; } = Enums.CategoriaProducto.Comida;
+        public bool Activo { get; set; } = true; // nueva propiedad, vamos a hacer un borrado lógico de productos
 
     }
 }

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MenuMontaditosApp.Views.ProductosCrudPage"
+             Title="Gestión de Productos">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- CABECERA -->
+        <Label Grid.Row="0"
+               Text="Gestión de Productos"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               Margin="0,10,0,10"/>
+
+        <!-- BOTÓN PARA ABRIR/CERRAR EL FORMULARIO -->
+        <Button Grid.Row="1"
+                x:Name="BotonNuevo"
+                Text="➕ Nuevo producto"
+                Clicked="MostrarFormulario_Click"
+                Margin="10,0,10,5"
+                HeightRequest="45"/>
+
+        <!-- FORMULARIO PLEGABLE (oculto por defecto) -->
+        <Border Grid.Row="2"
+                x:Name="PanelFormulario"
+                Stroke="Gray"
+                StrokeThickness="1"
+                Margin="10"
+                Padding="10"
+                IsVisible="False">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="5"/>
+            </Border.StrokeShape>
+
+            <VerticalStackLayout Spacing="8">
+
+                <Label x:Name="LabelTitulo"
+                       Text="Nuevo producto"
+                       FontAttributes="Bold"
+                       FontSize="16"/>
+
+                <Entry x:Name="EntryNombre"
+                       Placeholder="Nombre del producto"/>
+
+                <Entry x:Name="EntryPrecio"
+                       Placeholder="Precio (ej: 4.50)"
+                       Keyboard="Numeric"/>
+
+                <Label Text="Categoría"/>
+                <Picker x:Name="PickerCategoria">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Comida</x:String>
+                            <x:String>Bebida</x:String>
+                            <x:String>Postre</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <Label x:Name="LabelError"
+                       TextColor="Red"
+                       IsVisible="False"/>
+
+                <HorizontalStackLayout Spacing="10" HorizontalOptions="End">
+                    <Button Text="Cancelar"
+                            Clicked="Cancelar_Click"
+                            BackgroundColor="Gray"
+                            TextColor="White"
+                            WidthRequest="100"/>
+                    <Button x:Name="BotonGuardar"
+                            Text="Guardar"
+                            Clicked="Guardar_Click"
+                            WidthRequest="100"/>
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- LISTA DE PRODUCTOS -->
+        <CollectionView Grid.Row="3"
+                        ItemsSource="{Binding Productos}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+
+                    <Border Stroke="Gray"
+                            StrokeThickness="1"
+                            Margin="10,5,10,5"
+                            Padding="10">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="5"/>
+                        </Border.StrokeShape>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label Text="{Binding Nombre}"
+                                       FontSize="16"
+                                       FontAttributes="Bold"/>
+                                <HorizontalStackLayout Spacing="10">
+                                    <Label Text="{Binding Precio, StringFormat='{0:F2} €'}"
+                                           FontSize="14"/>
+                                    <Label Text="{Binding Categoria}"
+                                           FontSize="14"
+                                           TextColor="Gray"/>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+
+                            <Button Grid.Column="1"
+                                    Text="Editar"
+                                    Clicked="Editar_Click"
+                                    CommandParameter="{Binding}"
+                                    Margin="0,0,5,0"/>
+
+                            <Button Grid.Column="2"
+                                    Text="Eliminar"
+                                    Clicked="Eliminar_Click"
+                                    CommandParameter="{Binding}"
+                                    BackgroundColor="IndianRed"
+                                    TextColor="White"/>
+
+                        </Grid>
+                    </Border>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+
+</ContentPage>

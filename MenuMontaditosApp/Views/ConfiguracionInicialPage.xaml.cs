@@ -52,7 +52,21 @@ namespace MenuMontaditosApp.Views
                 "Vale"
             );
 
-            // Aqui luego haremos la navegación al login, de momento lo dejamos
+            // Limpiamos los campos pa que no quede el formulario relleno
+            EntryUsuario.Text = string.Empty;
+            EntryPassword.Text = string.Empty;
+            EntryPasswordRepetir.Text = string.Empty;
+            LabelError.IsVisible = false;
+
+            // Mostramos el aviso. Como es await, esperamos a que el usuario pulse "Vale"
+            await DisplayAlertAsync(
+                "Listo",
+                "Administrador creado correctamente. Ya puedes iniciar sesión.",
+                "Vale"
+            );
+
+            // Una vez aceptado, redirigimos al login
+            await Shell.Current.GoToAsync("//SeleccionRolPage"); // el doble // me borra el historial de navegacion,para evitar que me vuelvan a leer el formulario los canallas
         }
     }
 }

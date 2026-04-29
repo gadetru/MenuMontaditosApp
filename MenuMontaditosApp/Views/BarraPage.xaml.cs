@@ -36,5 +36,10 @@ namespace MenuMontaditosApp.Views
                 );
             }
         }
+
+        private async void GestionProductos_Click(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("ProductosCrudPage");
+        }
     }
 }
